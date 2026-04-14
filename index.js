@@ -4,11 +4,7 @@ canvas.width = innerWidth;
 canvas.height = innerHeight;
 canvas.style.backgroundColor = "rgb(0, 0, 0)";
 
-canvas.addEventListener("click", (e) => {
-  circles(e);
-});
-
-function circles(e) {
+function circles() {
   const r = Math.floor(Math.random() * 256);
   const g = Math.floor(Math.random() * 256);
   const b = Math.floor(Math.random() * 256);
@@ -17,6 +13,15 @@ function circles(e) {
   const y = radius + Math.random() * (innerHeight - radius * 2);
   ctx.beginPath();
   ctx.arc(x, y, radius, 0, Math.PI * 2);
-  ctx.fillStyle = `rgb(${r}, ${g}, ${b})`;
+  ctx.fillStyle = `rgba(${r}, ${g}, ${b}, 0.7)`;
   ctx.fill();
 }
+
+let count = 0;
+const interval = setInterval(function () {
+  circles();
+  count++;
+  if (count == 500) {
+    clearInterval(interval);
+  }
+}, 100);
